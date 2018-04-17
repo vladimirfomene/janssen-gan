@@ -161,7 +161,7 @@ D_opt = tf.train.AdamOptimizer(2e-4).minimize(D_loss, var_list=D_var_list)
 G_opt = tf.train.AdamOptimizer(2e-4).minimize(G_loss, var_list=G_var_list)
 
 # Variable initialization
-num_epochs = 5000
+num_epochs = 2000
 
 # Start interactive session
 session = tf.InteractiveSession()
