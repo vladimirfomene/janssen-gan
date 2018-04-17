@@ -183,11 +183,12 @@ d_errors = []
 #Training
 # Iterate through epochs
 for epoch in range(num_epochs):
-    print(epoch + "\n")
+    print(str(epoch) + "\n")
+
     for n_batch, batch in enumerate(train_negatives):
 
         # 1. Train Discriminator
-        if(n_batch == train_positives.shape[0]):
+        if((n_batch == train_positives.shape[0])):
             break
         else:
             X_batch = images_to_vectors(train_positives[n_batch].permute(0, 2, 3, 1).numpy())
@@ -214,11 +215,11 @@ for epoch in range(num_epochs):
 #                 d_error, g_error, d_pred_real, d_pred_fake
 #             )
     #create directory to store images after every training step
-	if not os.path.exists(epoch):
-    	os.makedirs(epoch)
+    if not os.path.exists(str(epoch)):
+        os.makedirs(str(epoch))
 
-	#print images to folders
-	Z_batch_test = images_to_vectors(test_negatives[round(epoch / 1000)].permute(0, 2, 3, 1).numpy())
+    #print images to folders
+    Z_batch_test = images_to_vectors(test_negatives[round(epoch / 1000)].permute(0, 2, 3, 1).numpy())
 
     # Generate images from test noise
     test_images = session.run(G_sample, feed_dict={Z: Z_batch_test})
@@ -226,7 +227,8 @@ for epoch in range(num_epochs):
 
     # Log Images
     for i in range(10):
-    	imsave(epoch + "/" + i + ".png", test_images[i])
+        print(test_images[i])
+        imsave(str(epoch) + "/" + str(i) + ".png", test_images[i])
 
     g_errors.append(g_error)
     d_errors.append(d_error)
@@ -238,4 +240,3 @@ np.savetxt("generator.csv", g_errors, delimiter=",")
 #print discriminator errors to csv file
 d_errors = np.array(d_errors)
 np.savetxt("discriminator.csv", d_errors, delimiter=",")
-
