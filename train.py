@@ -1,5 +1,6 @@
 from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
+from skimage import exposure
 import collections
 import hashlib
 import os
@@ -227,7 +228,7 @@ for epoch in range(num_epochs):
 
     # Log Images
     for i in range(10):
-        imsave(str(epoch) + "/" + str(i) + ".png", img_as_float(test_images[i]))
+        imsave(str(epoch) + "/" + str(i) + ".png", exposure.rescale_intensity(test_images[i], in_range='float'))
 
     g_errors.append(g_error)
     d_errors.append(d_error)
