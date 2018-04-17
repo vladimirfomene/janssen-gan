@@ -7,6 +7,7 @@ import os.path
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from skimage.io import imsave
+from skimage import img_as_float
 import re
 import numpy as np
 import torch
@@ -226,8 +227,7 @@ for epoch in range(num_epochs):
 
     # Log Images
     for i in range(10):
-        print(test_images[i])
-        imsave(str(epoch) + "/" + str(i) + ".png", test_images[i])
+        imsave(str(epoch) + "/" + str(i) + ".png", img_as_float(test_images[i]))
 
     g_errors.append(g_error)
     d_errors.append(d_error)
